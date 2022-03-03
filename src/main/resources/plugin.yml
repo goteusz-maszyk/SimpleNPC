@@ -7,3 +7,7 @@ commands:
   npc:
     description: npc command
     permission: simplenpc.cmd
+permissions:
+  simplenpc.cmd:
+    default: op
+    description: NPC management command
