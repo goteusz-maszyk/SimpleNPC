@@ -11,13 +11,12 @@ import java.util.Arrays;
 public class MainCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
-
         if(args == null || args.length < 1) {
             sender.sendMessage(ChatColor.RED + "Please provide valid action from one of following: |create|remove|setname|setskin|tphere|reload|");
             return false;
         }
+
+        String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
 
         switch (args[0]) {
             case "reload":
