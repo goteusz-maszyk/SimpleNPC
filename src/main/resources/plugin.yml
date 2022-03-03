@@ -1,0 +1,9 @@
+name: SimpleNPC
+version: '${project.version}'
+main: org.gotitim.simplenpc.SimpleNPC
+api-version: 1.18
+authors: [ gotitim ]
+commands:
+  npc:
+    description: npc command
+    permission: simplenpc.cmd
