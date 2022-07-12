@@ -42,6 +42,8 @@ public class MainCommand implements CommandExecutor {
                 return new RemoveCommand().execute(player, newArgs);
             case "tphere":
                 return new TPCommand().execute(player, newArgs);
+            case "tpto":
+                return new TPToCommand().execute(player, newArgs);
             case "setskin":
                 return new SetSkinCommand().execute(player, newArgs);
             case "setname":

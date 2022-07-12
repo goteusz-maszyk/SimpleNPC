@@ -1,5 +1,6 @@
 package org.gotitim.simplenpc;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.gotitim.simplenpc.cmds.MainCommand;
 import org.gotitim.simplenpc.cmds.TabCompleter;
@@ -19,7 +20,6 @@ public final class SimpleNPC extends JavaPlugin {
 
         getCommand("npc").setExecutor(new MainCommand());
         getCommand("npc").setTabCompleter(new TabCompleter());
-
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new PlayerMove(), this);
 
@@ -32,5 +32,20 @@ public final class SimpleNPC extends JavaPlugin {
         NPC.addAllToConfig();
 
         NPCConfig.save();
+    }
+
+    public static Class getNMSClass(String className, Boolean isBukkitClass) {
+        String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
+
+        try {
+            if(isBukkitClass) {
+                return Class.forName("org.bukkit.craftbukkit." + version + "." + className);
+            } else {
+                return Class.forName("net.minecraft.server." + className);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

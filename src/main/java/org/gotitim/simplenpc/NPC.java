@@ -3,19 +3,16 @@ package org.gotitim.simplenpc;
 import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import net.minecraft.network.protocol.game.ClientboundAddPlayerPacket;
-import net.minecraft.network.protocol.game.ClientboundPlayerInfoPacket;
-import net.minecraft.network.protocol.game.ClientboundRemoveEntitiesPacket;
-import net.minecraft.network.protocol.game.ClientboundTeleportEntityPacket;
+import net.minecraft.network.protocol.game.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
@@ -46,7 +43,7 @@ public class NPC {
         MinecraftServer server = ((CraftServer) Bukkit.getServer()).getServer();
         CraftWorld world = (CraftWorld) Bukkit.getWorld(location.getWorld().getName());
 
-        ServerPlayer player = new ServerPlayer(server, world.getHandle(), npcGameProfile);
+        ServerPlayer player = new ServerPlayer(server, world.getHandle(), npcGameProfile, null  );
 
         player.setPos(location.getX(), location.getY(), location.getZ());
 

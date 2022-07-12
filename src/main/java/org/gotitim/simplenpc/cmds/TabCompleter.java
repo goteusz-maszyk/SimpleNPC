@@ -17,6 +17,7 @@ public class TabCompleter implements org.bukkit.command.TabCompleter {
             returned.add("create");
             returned.add("remove");
             returned.add("tphere");
+            returned.add("tpto");
             returned.add("setskin");
             returned.add("setname");
             returned.add("reload");

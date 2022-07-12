@@ -4,8 +4,10 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.gotitim.simplenpc.NPC;
 import org.gotitim.simplenpc.SimpleNPC;
@@ -33,10 +35,10 @@ public class CreateCommand {
 
         GameProfile npcGameProfile = new GameProfile(UUID.randomUUID(), npcName);
 
-        MinecraftServer server = sp.getServer();
+        MinecraftServer server = ((CraftServer) Bukkit.getServer()).getServer();
         ServerLevel level = sp.getLevel();
 
-        ServerPlayer npc = new ServerPlayer(server, level, npcGameProfile);
+        ServerPlayer npc = new ServerPlayer(server, level, npcGameProfile, null);
 
         Location loc = player.getLocation();
 
