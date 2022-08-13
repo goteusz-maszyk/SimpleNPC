@@ -101,8 +101,8 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
             <version>1.19-R0.1-SNAPSHOT</version>
-            <classifier>remapped-mojang</classifier>
             <scope>provided</scope>
+            <classifier>remapped-mojang</classifier>
         </dependency>
     </dependencies>
 </project>

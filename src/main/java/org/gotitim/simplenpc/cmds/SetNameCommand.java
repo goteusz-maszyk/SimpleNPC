@@ -18,11 +18,19 @@ public class SetNameCommand {
             return false;
         }
 
+        if(args[1].length() > 16) {
+            player.sendMessage("ERROR: NPC name is too long! It needs to be =< " + 16);
+            return false;
+        }
+
         NPC npc = SimpleNPC.npcs.get(args[0]);
 
         npc.name = args[1];
 
-        player.sendMessage("Set the NPC's nick to " + npc.name + ".\nNOTE: You may need to reload plugin and rejoin server to see the effect.");
+        player.sendMessage("Set the NPC's nick to " + npc.name);
+
+        npc.despawnForAllPlayers();
+        npc.spawnForAllPlayers();
 
         return true;
     }

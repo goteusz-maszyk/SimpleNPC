@@ -4,6 +4,9 @@ import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import net.minecraft.network.protocol.game.*;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
@@ -46,6 +49,8 @@ public class NPC {
         ServerPlayer player = new ServerPlayer(server, world.getHandle(), npcGameProfile, null  );
 
         player.setPos(location.getX(), location.getY(), location.getZ());
+        SynchedEntityData data = player.getEntityData();
+        data.set(new EntityDataAccessor<>(17, EntityDataSerializers.BYTE), (byte) 126);
 
         this.id = id;
         this.name = name;
@@ -55,11 +60,11 @@ public class NPC {
 
     public void spawnForAllPlayers() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            ServerPlayer sp = ((CraftPlayer) player).getHandle();
 
-            ServerGamePacketListenerImpl conn = sp.connection;
+            ServerGamePacketListenerImpl conn = ((CraftPlayer) player).getHandle().connection;
             conn.send(new ClientboundPlayerInfoPacket(ClientboundPlayerInfoPacket.Action.ADD_PLAYER, this.player));
             conn.send(new ClientboundAddPlayerPacket(this.player));
+            conn.send(new ClientboundSetEntityDataPacket(this.player.getId(), this.player.getEntityData(), true));
         }
     }
 
@@ -105,6 +110,8 @@ public class NPC {
                     textureProperty.get("value").getAsString(),
                     textureProperty.get("signature").getAsString()
             ));
+
+
         } catch (IOException e) {
             Bukkit.getLogger().log(Level.ALL, "ERROR: Can't fetch npc " + this.id + " skin!");
             e.printStackTrace();

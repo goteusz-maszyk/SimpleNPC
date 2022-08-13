@@ -1,14 +1,14 @@
 package org.gotitim.simplenpc.cmds;
 
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 import org.gotitim.simplenpc.NPC;
 import org.gotitim.simplenpc.SimpleNPC;
 
 public class RemoveCommand {
-    public boolean execute(Player player, String[] args) {
+    public boolean execute(CommandSender sender, String[] args) {
         if(!SimpleNPC.npcs.containsKey(args[0])) {
-            player.sendMessage(ChatColor.RED + "This NPC doesn't exist!");
+            sender.sendMessage(ChatColor.RED + "This NPC doesn't exist!");
 
             return false;
         }
@@ -17,6 +17,7 @@ public class RemoveCommand {
         npc.despawnForAllPlayers();
 
         SimpleNPC.npcs.remove(args[0]);
+        sender.sendMessage("Removed NPC");
 
         return true;
     }

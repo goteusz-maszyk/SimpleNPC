@@ -21,6 +21,8 @@ public class MainCommand implements CommandExecutor {
         switch (args[0]) {
             case "reload":
                 return new ReloadCommand().execute(sender, newArgs);
+            case "remove":
+                return new RemoveCommand().execute(sender, newArgs);
         }
 
         if(!(sender instanceof Player)) {
@@ -38,8 +40,6 @@ public class MainCommand implements CommandExecutor {
         switch (args[0]) {
             case "create":
                 return new CreateCommand().execute(player, newArgs);
-            case "remove":
-                return new RemoveCommand().execute(player, newArgs);
             case "tphere":
                 return new TPCommand().execute(player, newArgs);
             case "tpto":
@@ -48,6 +48,8 @@ public class MainCommand implements CommandExecutor {
                 return new SetSkinCommand().execute(player, newArgs);
             case "setname":
                 return new SetNameCommand().execute(player, newArgs);
+            case "edit":
+                return new EditCommand().execute(player, newArgs);
         }
         return true;
     }
